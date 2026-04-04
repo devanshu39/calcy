@@ -7,41 +7,51 @@ root.config(bg="#1e1e2e")
 exp = ""
 dis_var = tk.StringVar()
 dis_var.set("0")
-#loggiccccc
 def press(value):
     print(value)
     global exp 
     if value == "=":
         try:
             result = str(eval(exp))
-            dis_var.set("result")
-            result = exp
+            dis_var.set(result)
+            exp = result
+            return  
         except:
             dis_var.set("error")
             exp = ""
+            return
     elif value == "c":
         exp = ""
         dis_var.set("0")
+        return
     elif value == "backspace":
         exp = exp[:-1]
         dis_var.set(exp if exp else 0)
+        return
     elif value == "%":
         try:
             exp = str(eval(exp)/100)
             dis_var.set(exp)
+            return
         except:
             dis_var.set("error")
             exp = ""
+            return
     elif value == "+/-":
         try:
             exp = str(eval(exp)*-1)
             dis_var.set(exp)
+            return
         except:
             dis_var.set("ERROR")
             EXP = "" 
+            return
     else:
-        if exp == "0":
-           exp =value
+        if exp == "" or exp == "0":
+           if value in "+-*/.":
+               exp = "0"+ value
+           else:
+            exp =value
         else:
          exp += value
     dis_var.set(exp) 
@@ -64,7 +74,7 @@ def get_colour(val):
     elif val in "backspace":
        return   "#f38ba8", "#1e1e2e"
     else:
-        return "#45475a", "#cdd6f4"
+        return "#01020c", "#253b83"
 def map_value(val):
     maping = {"÷": "/", "×": "*", "−": "-"}
     return maping.get(val,val)
@@ -74,7 +84,7 @@ for row_list in buttons:
     row_frame=tk.Frame(b_frame,bg="#1e1e2e")
     row_frame.pack(fill="both" , expand=True , pady=4)
     for val in row_list:
-        fg , bg = get_colour(val)
+        bg , fg = get_colour(val)
         btn = tk.Button(row_frame,text=val,font=("Arial", 18, "bold"),
                         bg=bg,fg=fg,activebackground=fg,activeforeground=bg,
                         relief="flat",cursor="hand2",
