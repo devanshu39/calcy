@@ -1,8 +1,8 @@
 import tkinter as tk 
 root = tk.Tk()
 root.title("calculator")
-root.geometry("320x500")
-root.resizable(False,False)
+root.geometry("500x1000")
+root.resizable(False,True)
 root.config(bg="#1e1e2e")
 exp = ""
 dis_var = tk.StringVar()
@@ -45,7 +45,7 @@ def press(value):
         except:
             dis_var.set("ERROR")
             EXP = "" 
-            return
+            return 
     else:
         if exp == "" or exp == "0":
            if value in "+-*/.":
@@ -60,7 +60,7 @@ scr_frame.pack(fill="both", padx=15)
 expr_label = tk.Label(scr_frame,textvariable=dis_var,font=("arial",36,"bold"),bg= "#1e1e2e",fg="#ffffff",anchor="e",padx=10)
 expr_label.pack(fill="both", ipady=20)
 tk.Frame(root,bg="#313244",height=2).pack(fill="x",padx=15)
-buttons = [["C",   "+/-", "%",  "÷"],
+buttons = [["c",   "+/-", "%",  "÷"],
     ["7",   "8",   "9",  "×"],
     ["4",   "5",   "6",  "−"],
     ["1",   "2",   "3",  "+"],
